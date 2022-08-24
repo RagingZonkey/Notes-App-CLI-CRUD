@@ -1,3 +1,5 @@
+'use strict';
+
 const yargs = require('yargs');
 const notesFunction = require('./notes');
 
@@ -56,8 +58,7 @@ yargs.command({
     command: 'list',
     describe: 'List all notes',
     handler: () => {
-        console.log('\nListing all the notes from '
-        + 'the system!');
+        notesFunction.listNotes();
     }
 });
 

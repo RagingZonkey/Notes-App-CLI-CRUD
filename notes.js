@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 const chalk = require('chalk');
 
@@ -47,6 +49,17 @@ const saveNotes = (notes) => {
     fs.writeFileSync('notes.json', dataJSON);
 };
 
+const listNotes = () => {
+    const notes = loadNotes();
+    if(notes.length > 0) {
+        console.log(chalk.green.inverse('Your notes:'));
+        console.log(notes);
+    } else {
+        console.log(chalk.red.inverse('There are currently no notes in the file.'));
+    }
+    
+};
+
 const loadNotes = () => {
     try {
         const readBuffer = fs.readFileSync('notes.json');
@@ -60,5 +73,6 @@ const loadNotes = () => {
 module.exports = {
     getNotes, 
     addNote,
-    removeNote
+    removeNote,
+    listNotes
 };
