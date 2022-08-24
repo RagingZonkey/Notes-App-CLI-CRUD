@@ -25,11 +25,17 @@ const addNote = (title, time) => {
 
 const removeNote = (title) => {
     const notes = loadNotes();
+    let elementIndex;
     for(let element of notes) {
         if(element.title === title) {
-            const elementIndex = notes.indexOf(element);
-            notes.splice(elementIndex, 1);
+            elementIndex = notes.indexOf(element);
+            notes.splice(elementIndex, 1);        
         }
+    }
+    if(elementIndex === undefined) {
+        console.log('There is no note with such' +
+        ' a title in the file.');
+        return null;
     }
     saveNotes(notes);
     console.log('Specified item has been removed.')
