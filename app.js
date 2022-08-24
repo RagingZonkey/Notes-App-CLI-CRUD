@@ -1,5 +1,4 @@
 const yargs = require('yargs');
-const chalk = require('chalk');
 const notesFunction = require('./notes');
 
 yargs.version('1.1.0');
@@ -11,12 +10,13 @@ yargs.command({
     builder: {
         title: {
             describe: 'Note title',
-            type: 'string'
+            type: 'string',
+            demandOption: true
         },
         triggertime: {
             describe: 'Notification trigger time',
             type: 'string',
-            demandOption: true
+            demandOption: false
         }
     },
     handler: (argv) => {

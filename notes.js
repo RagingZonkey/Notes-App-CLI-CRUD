@@ -1,4 +1,5 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 const getNotes = (title) => {
     return 'Your notes...'
@@ -16,10 +17,10 @@ const addNote = (title, time) => {
             time
         });
         saveNotes(notes);
-        console.log('A new note has been created.');
+        console.log(chalk.green('A new note has been created.'));
     } else {
-        console.log('The title of the note you are ' +
-        'trying to pass seems to be duplicate.');
+        console.log(chalk.red('The title of the note you are ' +
+        'trying to pass seems to be duplicate.'));
     }
 };
 
@@ -33,12 +34,12 @@ const removeNote = (title) => {
         }
     }
     if(elementIndex === undefined) {
-        console.log('There is no note with such' +
-        ' a title in the file.');
+        console.log(chalk.red('There is no note with such' +
+        ' a title in the file.'));
         return null;
     }
     saveNotes(notes);
-    console.log('Specified item has been removed.')
+    console.log(chalk.green('Specified item has been removed.'));
 };
 
 const saveNotes = (notes) => {
