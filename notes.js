@@ -53,7 +53,9 @@ const listNotes = () => {
     const notes = loadNotes();
     if(notes.length > 0) {
         console.log(chalk.green.inverse('Your notes:'));
-        console.log(notes);
+        notes.forEach(note => {
+            console.log(note.title)
+        });
     } else {
         console.log(chalk.red.inverse('There are currently no notes in the file.'));
     }
