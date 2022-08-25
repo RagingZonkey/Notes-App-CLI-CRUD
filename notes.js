@@ -1,19 +1,27 @@
-'use strict';
-
 const fs = require('fs');
 const chalk = require('chalk');
 
-const getNotes = (title) => {
-    return 'Your notes...'
+const readNote = (title) => {
+    const notes = loadNotes();
+    const searchedNote = notes.find(note => {
+        if(note.title === title) {
+            return note;
+        }
+    });
+
+    if(!!searchedNote) {
+        console.log(chalk.green('Note found successfuly:'), 
+        chalk.green.inverse(`${searchedNote.title}`));
+        if(searchedNote.hasOwnProperty('time')) console.log(chalk.green
+        .inverse(`Action appointed at: ${searchedNote.time}`));
+    } else console.log(chalk.red(`Such a note doesn't exist!`));
 };
 
 const addNote = (title, time) => {
     const notes = loadNotes();
-    const duplicateOnes = notes.filter(note => {
-        return note.title === title;
-    });
+    const notesArrayHasDuplicates = notes.find(note => note.title === title);
 
-    if(duplicateOnes.length === 0) {
+    if(!notesArrayHasDuplicates) {
         notes.push({
             title,
             time
@@ -72,9 +80,9 @@ const loadNotes = () => {
     }
 };
  
-module.exports = {
-    getNotes, 
+module.exports = { 
     addNote,
     removeNote,
-    listNotes
+    listNotes, 
+    readNote
 };

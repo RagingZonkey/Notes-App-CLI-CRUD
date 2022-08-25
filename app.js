@@ -1,5 +1,3 @@
-'use strict';
-
 const yargs = require('yargs');
 const notesFunction = require('./notes');
 
@@ -13,17 +11,17 @@ yargs.command({
         title: {
             describe: 'Note title',
             type: 'string',
-            demandOption: true
+            demandOption: true,
         },
         triggertime: {
             describe: 'Notification trigger time',
             type: 'string',
-            demandOption: false
+            demandOption: false,
         }
     },
     handler: (argv) => {
         notesFunction.addNote(argv.title, argv.triggertime);
-    }
+    },
 });
 
 // Create remove functionality
@@ -34,23 +32,29 @@ yargs.command({
             describe: 'Title of the particular note you' +
             'want to delete',
             demandOption: true,
-            type: 'string'
+            type: 'string',
         }
     },
     describe: 'Remove a note',
     handler: (argv) => {
         notesFunction.removeNote(argv.title);
-    }
+    },
 });
 
 // Create read functionality
 yargs.command({
     command: 'read',
+    builder: {
+        title:{
+            describe: `Search a note by it's name.`,
+            demandOption: true,
+            type: 'string',
+        }
+    },
     describe: 'Read a note',
-    handler: () => {
-        console.log('\nReading a note from '
-        + 'the system!');
-    }
+    handler: (argv) => {
+        notesFunction.readNote(argv.title);
+    },
 });
 
 // Create list functionality
@@ -59,7 +63,7 @@ yargs.command({
     describe: 'List all notes',
     handler: () => {
         notesFunction.listNotes();
-    }
+    },
 });
 
 
