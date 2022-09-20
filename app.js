@@ -76,12 +76,12 @@ yargs.command({
             type: 'string',
             demandOption: true,
         },
-        changeTitle: {
+        changetitle: {
             describe: 'Notification trigger time - updated value',
             type: 'string',
             demandOption: true,
         },
-        changeTime: {
+        changetime: {
             describe: 'Notification trigger time - updated value',
             type: 'string',
             demandOption: false,
