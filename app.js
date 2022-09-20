@@ -1,5 +1,5 @@
 const yargs = require('yargs');
-const notesFunction = require('./notes');
+const notesFunctionality = require('./notes');
 
 yargs.version('1.1.0');
 
@@ -17,10 +17,10 @@ yargs.command({
             describe: 'Notification trigger time',
             type: 'string',
             demandOption: false,
-        }
+        },
     },
     handler: (argv) => {
-        notesFunction.addNote(argv.title, argv.triggertime);
+        notesFunctionality.addNote(argv.title, argv.triggertime);
     },
 });
 
@@ -37,7 +37,7 @@ yargs.command({
     },
     describe: 'Remove a note',
     handler: (argv) => {
-        notesFunction.removeNote(argv.title);
+        notesFunctionality.removeNote(argv.title);
     },
 });
 
@@ -53,7 +53,7 @@ yargs.command({
     },
     describe: 'Read a note',
     handler: (argv) => {
-        notesFunction.readNote(argv.title);
+        notesFunctionality.readNote(argv.title);
     },
 });
 
@@ -62,11 +62,35 @@ yargs.command({
     command: 'list',
     describe: 'List all notes',
     handler: () => {
-        notesFunction.listNotes();
+        notesFunctionality.listNotes();
     },
 });
 
-
+// Create update functionality
+yargs.command({
+    command: 'update',
+    describe: 'Update a note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            type: 'string',
+            demandOption: true,
+        },
+        changeTitle: {
+            describe: 'Notification trigger time - updated value',
+            type: 'string',
+            demandOption: true,
+        },
+        changeTime: {
+            describe: 'Notification trigger time - updated value',
+            type: 'string',
+            demandOption: false,
+        },
+    },
+    handler: (argv) => {
+        notesFunctionality.updateNote(argv.title, argv.changeTitle, argv.changeTime);
+    },
+});
 
 yargs.parse();
 

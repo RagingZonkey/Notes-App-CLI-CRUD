@@ -1,2 +1,5 @@
 # NPM installed dependencies
 node_modules/
+
+# Intellij Idea metadata
+.idea/
